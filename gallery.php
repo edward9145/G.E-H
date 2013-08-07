@@ -22,8 +22,11 @@ and open the template in the editor.
     $url = $_REQUEST['url'];
     echo '<a href="download.php?url=', $url, '"> Download </a><br >';
 
-    $path = parse_url($url)['path'];
-    $id = explode('/', $path)[2];
+    $result = parse_url($url);
+    $path = $result['path'];
+    $arr = explode('/', $path);
+    $id = $arr[2];
+    
     $cache_filename = CACHE_FOLDER. $id . ".txt";
     $img0_src = CACHE_FOLDER. $id . "-0.jpg";
     if(file_exists($cache_filename) && file_exists($img0_src)){
@@ -41,7 +44,7 @@ and open the template in the editor.
     echo $src, ' ', $img0_src, '<br />', "\n";
     
     
-    if(!is_file($cache_filename)){
+    if(!file_exists($cache_filename)){
         $fp = fopen($cache_filename, 'w');
         if($fp){
             fwrite($fp, "<table>\n");
@@ -81,7 +84,7 @@ and open the template in the editor.
         }
         fclose($fp);
     }
-    
+
     echo file_get_contents($cache_filename);
     
     ?>

@@ -41,7 +41,7 @@ and open the template in the editor.
         else{
             $addr = explode('~', $ele->plaintext);
             $src = 'http://' . $addr[1] . '/' . $addr[2];
-            $src = cache_image(basename($src,".jpg"), $src);
+//            $src = cache_image(basename($src,".jpg"), $src);
             echo '<img src="', $src, '" alt="', $addr[3],'" />';
         }
         
