@@ -15,7 +15,6 @@ and open the template in the editor.
     </head>
     <body>
     <?php
-    error_reporting(E_ALL);
     include_once 'simplehtmldom_1_5/simple_html_dom.php';
     include_once 'func.php';
     

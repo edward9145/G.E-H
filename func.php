@@ -1,6 +1,8 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
 include_once 'simplehtmldom_1_5/simple_html_dom.php';
 
+define ("GEH_URL", "http://g.e-hentai.org/");
 define ("CACHE_FOLDER", "temp/");
 define ("PROXY_URL", "http://edw.ap01.aws.af.cm/proxy.php?url=");
 
@@ -94,5 +96,42 @@ function clear_cache($dir){
     }
 }
 
+function stringToHex($string) {
+    $hexString = '';
+    for ($i=0; $i < strlen($string); $i++) {
+        $hexString .= '%' . bin2hex($string[$i]);
+    }
+    return $hexString;
+}
+function hexToString($hexString) {
+    return pack("H*" , str_replace('%', '', $hexString));
+}
+
+function sibling_page($url, $i){
+    $arr = parse_url($url);
+    parse_str($arr['query'], $query);
+    $query['page'] = $i;
+    $url = $arr['scheme'] . '://' . $arr['host'] . $arr['path'] . 
+            '?' . http_build_query($query);
+    return $url;
+}
+
+function print_pages($url){
+    echo '<div data-role="navbar" data-grid="d">','<ul>';
+    for($i=0; $i<5; $i++){
+        $url_i = sibling_page($url, $i);
+        $url_i = stringToHex($url_i);
+        echo '<li><a href="index.php?url=', $url_i, '">', ($i+1), 
+            '</a></li>';
+    }
+    echo '</ul>','</div>';
+}
+
+function print_category(){
+/*
+ *  'http://g.e-hentai.org/?page=1&f_doujinshi=1&f_manga=0&f_artistcg=0&f_gamecg=0&f_western=0&f_non-h=0&f_imageset=0&f_cosplay=0&f_asianporn=0&f_misc=0&f_search=asuka&f_apply=Apply+Filter'    
+ *  'http://g.e-hentai.org/?f_doujinshi=1&f_manga=0&f_artistcg=0&f_gamecg=0&f_western=0&f_non-h=0&f_imageset=0&f_cosplay=0&f_asianporn=0&f_misc=0&f_search=Search+Keywords&f_apply=Apply+Filter'
+ */   
+}
 
 ?>
