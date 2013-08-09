@@ -6,7 +6,7 @@ and open the template in the editor.
 <html>
     <head>
 <!--        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 	<title>E-H Gallery</title>
         
         <link rel="stylesheet" href="css/themes/jquery.mobile-1.3.1.min.css"/>
@@ -61,7 +61,7 @@ and open the template in the editor.
         if($_REQUEST['url']) $url = $_REQUEST['url'];
         ?>
         
-        <div data-role="page" >
+<!--        <div data-role="page" >-->
             <div data-role="header" data-position="fixed" data-theme="c">
                 <table>
                     <tr>  
@@ -112,7 +112,7 @@ and open the template in the editor.
         $href = $arc->href;
         $title = $arc->plaintext;
 
-        echo "\n", '<a href="', $gallery_php, $href ,'">', $title , '</a>';
+        echo "\n", '<a href="', $gallery_php, $href ,'" target="_blank">', $title , '</a>';
         echo '<div>';
         
         $img = $ele->find('img', 0);
@@ -140,6 +140,6 @@ and open the template in the editor.
             ?>
         </div>
 	            
-        </div>
+<!--        </div>-->
     </body>
 </html>

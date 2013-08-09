@@ -59,7 +59,7 @@ and open the template in the editor.
                     $style = $ele->style;
                     $style = preg_replace('/http(.*)jpg/', $img0_src, $style);
                     $href = $ele->find('a', 0)->href;
-                    fwrite($fp, '<a href="'. $image_php. $href. '">'.
+                    fwrite($fp, '<a href="'. $image_php. $href. '" rel="external">'.
                          '<div style="'. $style. '"></div>'.
                          '</a>'. "\n");
                     fwrite($fp, '</td>');
@@ -78,7 +78,7 @@ and open the template in the editor.
                     $style = $ele->style;
                     $style = preg_replace('/http(.*)jpg/', $img0_src, $style);
                     $href = $ele->find('a', 0)->href;
-                    echo '<a href="', $image_php, $href, '">',
+                    echo '<a href="', $image_php, $href, '" rel="external">',
                          '<div style="', $style, '"></div>',
                          '</a>', "\n";
                     echo '</td>';
