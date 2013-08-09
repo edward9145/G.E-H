@@ -39,10 +39,14 @@ function image_0_src($url){
     return image_0_src_by_html($html);
 }
 
-function image_src($url){
-    $html = file_get_html_proxy($url);
+function image_src_by_html($html){
     $img = $html->find('img[id=img]', 0);
     return $img->src;
+}
+
+function image_src($url){
+    $html = file_get_html_proxy($url);
+    return image_src_by_html($html);
 }
 
 function check_cache($name){
@@ -107,10 +111,11 @@ function hexToString($hexString) {
     return pack("H*" , str_replace('%', '', $hexString));
 }
 
-function sibling_page($url, $i){
+function sibling_page($url, $pstr, $i){
     $arr = parse_url($url);
+    $query = array();
     parse_str($arr['query'], $query);
-    $query['page'] = $i;
+    $query[$pstr] = $i;
     $url = $arr['scheme'] . '://' . $arr['host'] . $arr['path'] . 
             '?' . http_build_query($query);
     return $url;
@@ -119,12 +124,36 @@ function sibling_page($url, $i){
 function print_pages($url){
     echo '<div data-role="navbar" data-grid="d">','<ul>';
     for($i=0; $i<5; $i++){
-        $url_i = sibling_page($url, $i);
+        $url_i = sibling_page($url, 'page', $i);
         $url_i = stringToHex($url_i);
         echo '<li><a href="index.php?url=', $url_i, '">', ($i+1), 
             '</a></li>';
     }
     echo '</ul>','</div>';
+}
+
+function print_prev_next($url, $pid){
+    echo '<div data-role="navbar">','<ul>';
+    $prev = sibling_page($url, 'p', $pid-1);
+    $next = sibling_page($url, 'p', $pid+1);
+    echo '<li><a href="gallery.php?url=', $prev, '">&lt</a></li>';
+    echo '<li><a href="gallery.php?url=', $next, '">&gt</a></li>';    
+    echo '</ul>','</div>';
+}
+
+function print_prev_next_img($url){
+    $html = file_get_html_proxy($url);                
+    $prev = $html->find('a[id=prev]', 0)->href;
+    $next = $html->find('a[id=next]', 0)->href;
+    
+    echo '<div data-role="navbar" >';
+    echo '<ul>';
+    echo '<li><a href="image.php?url=', $prev, '">&lt</a></li>';
+//    echo '<li class="ui-block-a"><a href="image.php?url=',$prev,'" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-theme="a" data-inline="true" class="ui-btn ui-btn-up-a ui-btn-inline"><span class="ui-btn-inner"><span class="ui-btn-text">&lt;</span></span></a></li>';
+    echo '<li><a href="image.php?url=', $next, '">&gt</a></li>';    
+//    echo '<li class="ui-block-b"><a href="image.php?url=',$next,'" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-theme="a" data-inline="true" class="ui-btn ui-btn-inline ui-btn-up-a"><span class="ui-btn-inner"><span class="ui-btn-text">&gt;</span></span></a></li>';
+    echo '</ul>';
+    echo '</div>';
 }
 
 function print_category(){

@@ -6,9 +6,10 @@ and open the template in the editor.
 <html>
     <head>
 <!--        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
-        <title>E-H Gallery</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/themes/jquery.mobile-1.3.1.min.css"/>
+	<title>E-H Gallery</title>
+        
+        <link rel="stylesheet" href="css/themes/jquery.mobile-1.3.1.min.css"/>
 
 	<script src="js/jquery-1.9.1.min.js"></script>
 	<script src="js/jquery.mobile-1.3.1.min.js"></script>
