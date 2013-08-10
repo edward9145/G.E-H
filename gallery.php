@@ -1,11 +1,7 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html>
     <head>
-        <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 	<title>Gallery</title>
         
@@ -47,7 +43,6 @@ and open the template in the editor.
         $img0_src = cache_image(basename($img0_src, ".jpg"), $src);
         // echo $src, ' ', $img0_src, '<br />', "\n";
 
-
         if(!file_exists($cache_filename)){
             $fp = fopen($cache_filename, 'w');
             if($fp){
@@ -59,7 +54,7 @@ and open the template in the editor.
                     $style = $ele->style;
                     $style = preg_replace('/http(.*)jpg/', $img0_src, $style);
                     $href = $ele->find('a', 0)->href;
-                    fwrite($fp, '<a href="'. $image_php. $href. '" rel="external">'.
+                    fwrite($fp, '<a href="'. $image_php. stringToHex($href). '" rel="external">'.
                          '<div style="'. $style. '"></div>'.
                          '</a>'. "\n");
                     fwrite($fp, '</td>');
@@ -78,7 +73,7 @@ and open the template in the editor.
                     $style = $ele->style;
                     $style = preg_replace('/http(.*)jpg/', $img0_src, $style);
                     $href = $ele->find('a', 0)->href;
-                    echo '<a href="', $image_php, $href, '" rel="external">',
+                    echo '<a href="', $image_php, stringToHex($href), '" rel="external">',
                          '<div style="', $style, '"></div>',
                          '</a>', "\n";
                     echo '</td>';

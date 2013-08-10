@@ -71,6 +71,9 @@ function cache_image($name, $src){
     $info = curl_getinfo($ch);
     curl_close($ch);
     file_put_contents($filename, $output);
+
+    @header('Content-type: text/html');
+
     $size = filesize($filename);
     if($size != $info['size_download']){
         // $failed_file = "img/failed.jpg";

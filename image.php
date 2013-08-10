@@ -1,12 +1,9 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html>
     <head>
-<!--        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!--        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">-->
+
 	<title>Image</title>
         <link rel="stylesheet" href="css/themes/jquery.mobile-1.3.1.min.css"/>
 	<script src="js/jquery-1.9.1.min.js"></script>
